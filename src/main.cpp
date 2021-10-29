@@ -11,51 +11,112 @@
 
 using namespace std;
 
-mutex all_func;
-string station;
-
-void go(int sec, int num)
+int random(const int& min, const int& max)
 {
-    this_thread::sleep_for(chrono::seconds(sec));
+    return rand() % (max - (min-1)) + min;
+}
 
-    all_func.lock();
-    while (!station.empty());
-    cout << "Train #" << num << " is arrived" << endl;
-    station += to_string(num);
-    all_func.unlock();
+void sleep(int sec)
+{
+    this_thread::sleep_for(chrono::seconds( sec ));
+}
+
+string random_meal()
+{
+    int r = random(1, 5);
+
+    if (r == 1)
+        return "pizza";
+    if (r == 2)
+        return "steak";
+    if (r == 3)
+        return "soup";
+    if (r == 4)
+        return "salad";
+    if (r == 5)
+        return "sushi";
+
+    return "nullptr";
+}
+
+//////////////////////////////////////////
+
+mutex print;
+mutex push;
+
+bool go_kitchen = true;
+bool go_courier = true;
+
+vector<string> orders;
+vector<string> to_courier;
+
+void kitchen()
+{
+    while(go_kitchen)
+    {
+        while (orders.empty());
+        int n = orders.size()-1;
+
+        print.lock();
+        cout << "now cooking: " << orders[n] << endl;
+        print.unlock();
+        sleep(random(5, 15));
+
+        print.lock();
+        cout << orders[n] << " is ready" << endl;
+        print.unlock();
+
+        {
+            push.lock();
+            to_courier.push_back(orders[n]);
+            if (orders.size() == n + 1)
+                orders.resize(n);
+            else {
+                for (int i = n; i < orders.size() - 1; i++)
+                    orders[i] = orders[i + 1];
+                orders.resize(orders.size() - 1);
+            }
+            push.unlock();
+        }
+    }
+}
+
+void courier()
+{
+    while (go_courier)
+    {
+        sleep(30);
+
+        print.lock();
+        cout << "courier took orders" << endl;
+        print.unlock();
+
+        push.lock();
+        to_courier.clear();
+        push.unlock();
+    }
 }
 
 int main()
 {
-    vector<int> sec;
-    for (int i = 1; i < 4; i++)
+    thread th_kitchen(kitchen);
+    thread th_courier(courier);
+    for (int i = 0; i < 10; i++)
     {
-        cout << "Enter " << i << " travel time: ";
-        int n; cin >> n; sec.push_back(n);
+        sleep(random(5, 10));
+
+        push.lock();
+        print.lock();
+
+        orders.push_back(random_meal());
+        cout << "add to order: " << orders[orders.size()-1] << endl;
+
+        print.unlock();
+        push.unlock();
     }
+    go_kitchen = false;
+    go_courier = false;
 
-    thread train_1(go, sec[0], 1);
-    thread train_2(go, sec[1], 2);
-    thread train_3(go, sec[2], 3);
-
-    int n = 0;
-    while (n != 3)
-    {
-        string move;
-        cin >> move;
-
-        if (move == "duration")
-        {
-            if (!station.empty())
-            {
-                n++;
-                cout << "Train #" << station << " left" << endl;
-                station.clear();
-            }
-        }
-    }
-
-    train_1.join();
-    train_2.join();
-    train_3.join();
+    th_kitchen.join();
+    th_courier.join();
 }
