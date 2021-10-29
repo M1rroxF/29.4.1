@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Programming/c++/skillbox/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+string
+-
+cstdlib
+-
+map
+-
+ctime
+-
+iomanip
+-
+thread
+-
+mutex
+-
+

@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
   "28.4.exe"
   "28.4.exe.manifest"
-  "28.4.lib"
   "28.4.pdb"
   "CMakeFiles/28.4.dir/main.cpp.obj"
+  "lib28.4.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

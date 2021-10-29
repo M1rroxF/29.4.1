@@ -1,0 +1,14 @@
+# Target labels
+ curl-populate
+# Source files and their labels
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/CMakeFiles/curl-populate
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/CMakeFiles/curl-populate.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/CMakeFiles/curl-populate-complete.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-build.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-configure.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-download.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-install.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-mkdir.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-patch.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-test.rule
+D:/Programming/c++/skillbox/cmake-build-debug/_deps/curl-subbuild/curl-populate-prefix/src/curl-populate-stamp/curl-populate-update.rule
