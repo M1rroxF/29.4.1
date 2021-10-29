@@ -13,6 +13,7 @@ using namespace std;
 
 int random(const int& min, const int& max)
 {
+    srand(time(nullptr));
     return rand() % (max - (min-1)) + min;
 }
 
@@ -109,7 +110,7 @@ int main()
         print.lock();
 
         orders.push_back(random_meal());
-        cout << "add to order: " << orders[orders.size()-1] << endl;
+        cout << "add order: " << orders[orders.size()-1] << endl;
 
         print.unlock();
         push.unlock();
